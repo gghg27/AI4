@@ -1,0 +1,108 @@
+site_name: AI 不完全指北
+site_description: 面向大一新生的 AI、Agent 与 Codex 实用指南
+site_author: AI 不完全指北共建者
+
+exclude_docs: |
+  superpowers/
+
+theme:
+  name: material
+  language: zh
+  font: false
+  icon:
+    logo: material/compass-outline
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+nav:
+  - 首页: index.md
+  - 引言: introduction.md
+  - 学习地图:
+      - 第一部分：计算机第一课:
+          - 总览: 01-computer/index.md
+          - 文件系统与终端: 01-computer/file-system-and-terminal.md
+          - Git 与开发环境: 01-computer/git-and-environment.md
+          - 必要软件与文件格式: 01-computer/essential-tools.md
+      - 第二部分：大模型与 Agent:
+          - 总览: 02-ai-and-agents/index.md
+          - 大模型是什么: 02-ai-and-agents/llm-basics.md
+          - 把模型用于真实任务: 02-ai-and-agents/practical-llm-use.md
+          - Agent、工具与权限: 02-ai-and-agents/agent-basics.md
+          - AI 应用开发岗路线: 02-ai-and-agents/ai-application-roadmap.md
+          - 动手搭一个小 Agent: 02-ai-and-agents/build-an-agent.md
+      - 第三部分：学习资源总库:
+          - 总览: 03-resources/index.md
+          - 计算机基础资源: 03-resources/computer-foundations.md
+          - LLM 与 Agent 资源: 03-resources/llm-and-agent-resources.md
+          - 编程与开源项目: 03-resources/coding-and-projects.md
+          - 学习网站与社区: 03-resources/communities-and-forums.md
+          - 如何筛选资源: 03-resources/resource-selection.md
+  - 关于: about.md
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra_javascript:
+  - assets/javascripts/vendor/mermaid-11.12.0.min.js
+  - assets/javascripts/mermaid.js
+
+extra:
+  generator: false
+
+copyright: 内容持续更新，请以各产品官方文档为准

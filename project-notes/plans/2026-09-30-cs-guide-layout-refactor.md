@@ -39,7 +39,7 @@
 - Consumes: Material for MkDocs 的 `.md-header`、`.md-tabs`、`.md-sidebar--primary` 和 `.md-nav` DOM 结构。
 - Produces: 无顶部标签栏、桌面端主导航可见且包含全部一级入口的页面骨架。
 
-- [ ] **Step 1: 在桌面测试中写入失败的导航骨架断言**
+- [x] **Step 1: 在桌面测试中写入失败的导航骨架断言**
 
 在 `verify_desktop` 首页加载完成后加入以下断言：
 
@@ -56,13 +56,13 @@
     assert primary_sidebar.get_by_role("link", name="关于", exact=True).is_visible()
 ```
 
-- [ ] **Step 2: 运行浏览器验证并确认因顶部标签仍存在或左栏入口缺失而失败**
+- [x] **Step 2: 运行浏览器验证并确认因顶部标签仍存在或左栏入口缺失而失败**
 
 Run: `.venv\Scripts\python tests\verify_site.py`
 
 Expected: FAIL at `.md-tabs` or primary sidebar assertions because `navigation.tabs` still moves the main navigation into the header.
 
-- [ ] **Step 3: 用最小配置切换为单栏顶部 + 左侧完整导航**
+- [x] **Step 3: 用最小配置切换为单栏顶部 + 左侧完整导航**
 
 在 `mkdocs.yml` 的 `theme.features` 中删除：
 
@@ -78,7 +78,7 @@ Expected: FAIL at `.md-tabs` or primary sidebar assertions because `navigation.t
 
 保留 `navigation.instant`、`navigation.tracking`、`navigation.sections`、`navigation.top`、`toc.follow`、搜索和代码功能。
 
-- [ ] **Step 4: 运行严格构建和浏览器验证**
+- [x] **Step 4: 运行严格构建和浏览器验证**
 
 Run: `.venv\Scripts\python -m mkdocs build --strict`
 
@@ -88,7 +88,7 @@ Run: `.venv\Scripts\python tests\verify_site.py`
 
 Expected: 新增导航骨架断言 PASS；若旧的截图样式断言失败，只记录为 Task 2 的预期失败，不回退配置。
 
-- [ ] **Step 5: 提交导航骨架**
+- [x] **Step 5: 提交导航骨架**
 
 ```powershell
 git add -- mkdocs.yml tests/verify_site.py
