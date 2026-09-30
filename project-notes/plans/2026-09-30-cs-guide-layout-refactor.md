@@ -329,13 +329,13 @@ git commit -m "test: verify responsive guide layout"
 - Consumes: Tasks 1–3 的全部实现。
 - Produces: 可交付的验证证据，不再新增行为。
 
-- [ ] **Step 1: 从干净进程执行严格构建**
+- [x] **Step 1: 从干净进程执行严格构建**
 
 Run: `.venv\Scripts\python -m mkdocs build --clean --strict`
 
 Expected: exit code 0，无 WARNING 或 ERROR。
 
-- [ ] **Step 2: 启动本地站点并执行浏览器验收**
+- [x] **Step 2: 启动本地站点并执行浏览器验收**
 
 Run: `.venv\Scripts\python -m mkdocs serve`
 
@@ -345,7 +345,7 @@ Run: `.venv\Scripts\python tests\verify_site.py`
 
 Expected: exit code 0，浏览器控制台错误为空。
 
-- [ ] **Step 3: 检查改动范围**
+- [x] **Step 3: 检查改动范围**
 
 Run: `git diff --check`
 
@@ -355,6 +355,6 @@ Run: `git status --short`
 
 Expected: 只包含本计划列出的站点配置、样式、测试、任务记录和截图文件改动；不得包含 `site/`、缓存或临时文件。
 
-- [ ] **Step 4: 记录最终验证结果**
+- [x] **Step 4: 记录最终验证结果**
 
 在交付说明中列出严格构建、桌面/平板/手机浏览器验证、暗色模式、Mermaid 和视觉截图检查的实际结果；任何未能运行的验证必须明确说明原因。
