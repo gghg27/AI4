@@ -39,7 +39,7 @@ def verify_desktop(browser) -> None:
         "label.md-nav__link", has_text="第二部分：大模型与 Agent"
     ).is_visible()
     assert primary_sidebar.locator(
-        "label.md-nav__link", has_text="第三部分：学习资源总库"
+        "label.md-nav__link", has_text="第三部分：链接合集"
     ).is_visible()
     assert primary_sidebar.get_by_text("计算机基础扫盲", exact=True).is_visible()
     assert primary_sidebar.get_by_text("底层原理", exact=True).is_visible()
