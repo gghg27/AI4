@@ -43,7 +43,7 @@ def verify_desktop(browser) -> None:
     ).is_visible()
     assert primary_sidebar.get_by_text("计算机基础扫盲", exact=True).is_visible()
     assert primary_sidebar.get_by_text("底层原理", exact=True).is_visible()
-    assert primary_sidebar.get_by_text("链接合集", exact=True).is_visible()
+    assert primary_sidebar.get_by_text("魔法", exact=True).is_visible()
     assert primary_sidebar.get_by_role("link", name="关于", exact=True).is_visible()
 
     primary_box = primary_sidebar.bounding_box()
