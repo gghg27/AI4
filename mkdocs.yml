@@ -45,23 +45,26 @@ nav:
   - 学习地图:
       - 第一部分：计算机第一课:
           - 总览: 01-computer/index.md
-          - 文件系统与终端: 01-computer/file-system-and-terminal.md
-          - Git 与开发环境: 01-computer/git-and-environment.md
-          - 必要软件与文件格式: 01-computer/essential-tools.md
+          - 计算机基础扫盲: 01-computer/计算机基础扫盲.md
+          - 电子笔记: 01-computer/电子笔记.md
+          - 与 AI 交互的文档格式:
+              - 总览: 01-computer/与ai交互的文档格式.md
+              - Markdown 语法详细教程: 01-computer/Markdown语法详细教程.md
+          - 科学上网: 01-computer/科学上网.md
+          - CS 自学指南: 01-computer/cs自学指南.md
+          - 技术论坛与电子书资源: 01-computer/技术论坛与电子书资源.md
+          - 工程化技能: 01-computer/工程化技能.md
       - 第二部分：大模型与 Agent:
           - 总览: 02-ai-and-agents/index.md
-          - 大模型是什么: 02-ai-and-agents/llm-basics.md
-          - 把模型用于真实任务: 02-ai-and-agents/practical-llm-use.md
-          - Agent、工具与权限: 02-ai-and-agents/agent-basics.md
-          - AI 应用开发岗路线: 02-ai-and-agents/ai-application-roadmap.md
-          - 动手搭一个小 Agent: 02-ai-and-agents/build-an-agent.md
-      - 第三部分：学习资源总库:
+          - 底层原理: 02-ai-and-agents/底层原理.md
+          - 应用层: 02-ai-and-agents/应用层.md
+      - 第三部分：链接合集:
           - 总览: 03-resources/index.md
-          - 计算机基础资源: 03-resources/computer-foundations.md
-          - LLM 与 Agent 资源: 03-resources/llm-and-agent-resources.md
-          - 编程与开源项目: 03-resources/coding-and-projects.md
-          - 学习网站与社区: 03-resources/communities-and-forums.md
-          - 如何筛选资源: 03-resources/resource-selection.md
+          - 魔法: 03-resources/魔法.md
+          - 学习资源类: 03-resources/学习资源类.md
+          - 大模型与 Agent: 03-resources/大模型agent.md
+          - 软件开发: 03-resources/软件开发.md
+          - 算法训练: 03-resources/算法训练.md
   - 关于: about.md
 
 plugins:
