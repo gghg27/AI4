@@ -96,8 +96,10 @@ def verify_desktop(browser) -> None:
         f"{BASE_URL}01-computer/Markdown语法详细教程/",
         wait_until="domcontentloaded",
     )
-    page.locator(".mermaid svg").first.wait_for(state="visible")
-    assert page.locator(".mermaid svg").count() > 0
+    assert page.locator("h1").first.inner_text().startswith("Markdown 语法详细教程")
+    mermaid_example = page.locator("p code", has_text="flowchart TD").first
+    mermaid_example.wait_for(state="visible")
+    assert "```mermaid" in mermaid_example.inner_text()
     assert errors == [], errors
     page.close()
 
