@@ -420,7 +420,32 @@ body {
   color: #eaf4ff;
 }
 
+@media screen and (min-width: 60.0625rem) and (max-width: 76.234375rem) {
+  .md-header__button[for="__drawer"] {
+    display: none;
+  }
+
+  .md-sidebar--primary {
+    position: sticky;
+    top: 2.4rem;
+    left: auto;
+    z-index: auto;
+    height: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .md-sidebar--secondary:not([hidden]) {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 60rem) {
+  .md-sidebar--primary {
+    width: 12.1rem;
+  }
+
   .route-grid {
     grid-template-columns: 1fr;
   }
@@ -433,6 +458,15 @@ body {
 @media screen and (max-width: 44rem) {
   .md-main__inner {
     margin-top: 0.5rem;
+  }
+
+  .md-content__inner {
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  .route-card {
+    min-height: 8.5rem;
   }
 
   .module-list ol {

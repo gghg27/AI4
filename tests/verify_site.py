@@ -102,21 +102,50 @@ def verify_mobile(browser) -> None:
     assert page.locator(".route-card").count() == 3
     assert_no_horizontal_overflow(page, 390)
 
+    primary_box = page.locator(".md-sidebar--primary").bounding_box()
+    assert primary_box is not None
+    assert primary_box["x"] < 0
+    assert primary_box["x"] + primary_box["width"] <= 0
+    assert not page.locator(".md-sidebar--secondary").is_visible()
+
     page.locator('label[for="__drawer"].md-header__button').click()
     assert page.locator("#__drawer").is_checked()
     assert page.get_by_role("link", name="引言").first.is_visible()
     page.locator('label[for="__drawer"].md-overlay').click()
     assert not page.locator("#__drawer").is_checked()
+    page.wait_for_function(
+        """() => {
+            const rect = document.querySelector('.md-sidebar--primary')
+                .getBoundingClientRect()
+            return rect.right <= 0
+        }"""
+    )
 
     ARTIFACTS.mkdir(exist_ok=True)
     page.screenshot(path=str(ARTIFACTS / "home-mobile.png"), full_page=True)
     page.close()
 
 
+def verify_tablet(browser) -> None:
+    page = browser.new_page(viewport={"width": 1024, "height": 900})
+    page.emulate_media(color_scheme="light")
+    page.goto(BASE_URL, wait_until="domcontentloaded")
+    page.locator(".route-card").first.wait_for(state="visible")
+
+    primary_box = page.locator(".md-sidebar--primary").bounding_box()
+    assert primary_box is not None
+    assert primary_box["x"] >= 0
+    assert not page.locator(".md-sidebar--secondary").is_visible()
+    assert not page.locator('label[for="__drawer"].md-header__button').is_visible()
+    assert_no_horizontal_overflow(page, 1024)
+    page.close()
+
+
 with sync_playwright() as playwright:
     chromium = playwright.chromium.launch(headless=True)
     verify_desktop(chromium)
+    verify_tablet(chromium)
     verify_mobile(chromium)
     chromium.close()
 
-print("Site verification passed: desktop, dark mode, and mobile.")
+print("Site verification passed: desktop, dark mode, tablet, and mobile.")

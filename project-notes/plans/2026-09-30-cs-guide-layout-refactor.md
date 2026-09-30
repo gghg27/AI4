@@ -234,7 +234,7 @@ git commit -m "style: add three-column reading layout"
 - Consumes: Task 2 的桌面三栏布局和 Material 原生抽屉开关 `#__drawer`。
 - Produces: 中等屏幕隐藏右侧目录、手机端使用导航抽屉、所有视口无横向溢出的最终站点。
 
-- [ ] **Step 1: 扩展失败的中等屏幕和移动端断言**
+- [x] **Step 1: 扩展失败的中等屏幕和移动端断言**
 
 新增 `verify_tablet`：
 
@@ -260,13 +260,13 @@ def verify_tablet(browser) -> None:
 
 并在主流程中于 `verify_desktop(chromium)` 和 `verify_mobile(chromium)` 之间调用 `verify_tablet(chromium)`。
 
-- [ ] **Step 2: 运行验证并确认断点行为尚未满足测试**
+- [x] **Step 2: 运行验证并确认断点行为尚未满足测试**
 
 Run: `.venv\Scripts\python tests\verify_site.py`
 
 Expected: FAIL at 960px 的侧栏可见性或水平溢出断言。
 
-- [ ] **Step 3: 收敛响应式规则**
+- [x] **Step 3: 收敛响应式规则**
 
 在现有 `@media screen and (max-width: 60rem)` 中保留首页卡片单列，并确保主题在该宽度隐藏右侧目录但保留左侧导航。不要用 `display: none` 覆盖 Material 的抽屉状态。
 
@@ -285,7 +285,7 @@ Expected: FAIL at 960px 的侧栏可见性或水平溢出断言。
 
 依赖主题自带的 drawer CSS 隐藏常驻侧栏，以保证菜单按钮仍能打开相同导航内容。
 
-- [ ] **Step 4: 运行完整验证并检查截图**
+- [x] **Step 4: 运行完整验证并检查截图**
 
 Run: `.venv\Scripts\python -m mkdocs build --strict`
 
@@ -301,7 +301,7 @@ Expected: 输出 `Site verification passed: desktop, dark mode, tablet, and mobi
 - `artifacts/home-dark.png`：侧栏、正文和卡片在深色模式下均清晰可读。
 - `artifacts/home-mobile.png`：正文无裁切，菜单抽屉能显示完整导航。
 
-- [ ] **Step 5: 更新测试完成文案与任务记录**
+- [x] **Step 5: 更新测试完成文案与任务记录**
 
 将测试脚本末尾输出改为：
 
@@ -311,7 +311,7 @@ print("Site verification passed: desktop, dark mode, tablet, and mobile.")
 
 在 `task_plan.md` 的 2026-09-30 小节勾选实施、严格构建、自动化验证和视觉复核，并将 `Current Status` 改为完成。
 
-- [ ] **Step 6: 最终提交**
+- [x] **Step 6: 最终提交**
 
 ```powershell
 git add -- docs/assets/stylesheets/extra.css tests/verify_site.py task_plan.md artifacts/home-desktop.png artifacts/home-dark.png artifacts/home-mobile.png
