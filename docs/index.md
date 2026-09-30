@@ -32,7 +32,7 @@
 
 <a class="route-card route-card--theory" href="03-resources/">
   <span class="route-index">第三部分</span>
-  <strong>学习资源总库</strong>
+  <strong>链接合集</strong>
   <span>按目标查找课程、网站、社区和开源项目，避免无效收藏。</span>
   <em>把开放网络变成自己的路线</em>
 </a>

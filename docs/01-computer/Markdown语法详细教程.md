@@ -1991,7 +1991,7 @@ print("实验代码")
 
 这里插入结果图：
 
-![实验结果](assets/result.png)
+`![实验结果](assets/result.png)`
 
 ## 八、结果分析
 
