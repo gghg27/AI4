@@ -41,6 +41,9 @@ def verify_desktop(browser) -> None:
     assert primary_sidebar.locator(
         "label.md-nav__link", has_text="第三部分：学习资源总库"
     ).is_visible()
+    assert primary_sidebar.get_by_text("计算机基础扫盲", exact=True).is_visible()
+    assert primary_sidebar.get_by_text("底层原理", exact=True).is_visible()
+    assert primary_sidebar.get_by_text("链接合集", exact=True).is_visible()
     assert primary_sidebar.get_by_role("link", name="关于", exact=True).is_visible()
 
     primary_box = primary_sidebar.bounding_box()
@@ -83,7 +86,16 @@ def verify_desktop(browser) -> None:
     page.goto(f"{BASE_URL}02-ai-and-agents/", wait_until="domcontentloaded")
     assert page.locator("h1").first.inner_text().startswith("第二部分")
 
-    page.goto(f"{BASE_URL}02-ai-and-agents/llm-basics/", wait_until="domcontentloaded")
+    page.goto(
+        f"{BASE_URL}02-ai-and-agents/底层原理/",
+        wait_until="domcontentloaded",
+    )
+    assert page.locator("h1").first.inner_text() == "底层原理"
+
+    page.goto(
+        f"{BASE_URL}01-computer/Markdown语法详细教程/",
+        wait_until="domcontentloaded",
+    )
     page.locator(".mermaid svg").first.wait_for(state="visible")
     assert page.locator(".mermaid svg").count() > 0
     assert errors == [], errors
