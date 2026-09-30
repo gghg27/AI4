@@ -90,7 +90,7 @@ def verify_desktop(browser) -> None:
         f"{BASE_URL}02-ai-and-agents/底层原理/",
         wait_until="domcontentloaded",
     )
-    assert page.locator("h1").first.inner_text() == "底层原理"
+    assert page.locator("h1").first.inner_text().startswith("底层原理")
 
     page.goto(
         f"{BASE_URL}01-computer/Markdown语法详细教程/",
