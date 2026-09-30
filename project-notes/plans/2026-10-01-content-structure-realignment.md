@@ -44,7 +44,7 @@
 - Consumes: `mkdocs.yml` 的 `nav` 配置和 `docs/` 下的 Markdown 文件。
 - Produces: 结构契约 `EXPECTED_NAV_PATHS`、`EXPECTED_TITLES`、`STALE_REFERENCES`，供后续任务验证。
 
-- [ ] **Step 1: 创建结构验证脚本**
+- [x] **Step 1: 创建结构验证脚本**
 
 写入以下脚本：
 
@@ -148,7 +148,7 @@ for stale_reference in STALE_REFERENCES:
 print("Content structure verification passed: navigation, titles, and links.")
 ```
 
-- [ ] **Step 2: 先把浏览器测试切换到新导航和新页面**
+- [x] **Step 2: 先把浏览器测试切换到新导航和新页面**
 
 在桌面端左侧导航断言中增加：
 
@@ -175,13 +175,13 @@ print("Content structure verification passed: navigation, titles, and links.")
     assert page.locator(".mermaid svg").count() > 0
 ```
 
-- [ ] **Step 3: 运行结构脚本并确认导航仍指向旧结构**
+- [x] **Step 3: 运行结构脚本并确认导航仍指向旧结构**
 
 Run: `.venv\Scripts\python.exe tests\verify_content_structure.py`
 
 Expected: FAIL at `actual_nav_paths == EXPECTED_NAV_PATHS`，输出仍包含 `file-system-and-terminal.md` 等旧路径。
 
-- [ ] **Step 4: 运行浏览器测试并确认左侧导航不含新页面**
+- [x] **Step 4: 运行浏览器测试并确认左侧导航不含新页面**
 
 Run:
 
@@ -193,7 +193,7 @@ python C:\Users\zj\.codex\skills\webapp-testing\scripts\with_server.py `
 
 Expected: FAIL at“计算机基础扫盲”“底层原理”或“链接合集”的左侧导航断言。
 
-- [ ] **Step 5: 提交失败测试**
+- [x] **Step 5: 提交失败测试**
 
 ```powershell
 git add -- tests/verify_content_structure.py tests/verify_site.py
@@ -224,7 +224,7 @@ git commit -m "test: define new content structure"
 - Consumes: Task 1 的 `EXPECTED_NAV_PATHS` 和 `EXPECTED_TITLES`。
 - Produces: 所有新页面均可从 MkDocs 导航到达，并以一致一级标题开头。
 
-- [ ] **Step 1: 用新路径映射替换 `mkdocs.yml` 的 `nav`**
+- [x] **Step 1: 用新路径映射替换 `mkdocs.yml` 的 `nav`**
 
 将 `nav` 完整替换为：
 
@@ -258,7 +258,7 @@ nav:
   - 关于: about.md
 ```
 
-- [ ] **Step 2: 为七个空白页面加入最小页面骨架**
+- [x] **Step 2: 为七个空白页面加入最小页面骨架**
 
 每个文件使用各自标题，正文统一为：
 
@@ -270,7 +270,7 @@ nav:
 
 适用文件：`计算机基础扫盲.md`、`电子笔记.md`、`科学上网.md`、`cs自学指南.md`、`技术论坛与电子书资源.md`、`底层原理.md`、`应用层.md`。
 
-- [ ] **Step 3: 为七个已有内容页面补一级标题**
+- [x] **Step 3: 为七个已有内容页面补一级标题**
 
 分别在文件最前面增加：
 
@@ -286,13 +286,13 @@ nav:
 
 每个标题只加入对应文件，并在标题后保留一个空行；原有正文顺序不变。
 
-- [ ] **Step 4: 运行结构测试并确认只剩链接类失败**
+- [x] **Step 4: 运行结构测试并确认只剩链接类失败**
 
 Run: `.venv\Scripts\python.exe tests\verify_content_structure.py`
 
 Expected: 导航和标题断言 PASS；测试继续因 `[[` 或旧文件名出现在总览页而 FAIL。
 
-- [ ] **Step 5: 提交导航和页面入口**
+- [x] **Step 5: 提交导航和页面入口**
 
 ```powershell
 git add -- mkdocs.yml docs/01-computer docs/02-ai-and-agents docs/03-resources
@@ -316,7 +316,7 @@ git commit -m "refactor: align navigation with content structure"
 - Consumes: Task 2 的最终导航路径和页面标题。
 - Produces: 总览页与导航互相一致，站内不再含 Obsidian 双链或旧页面引用。
 
-- [ ] **Step 1: 把第一部分 roadmap 改为可点击链接**
+- [x] **Step 1: 把第一部分 roadmap 改为可点击链接**
 
 将列表替换为：
 
@@ -332,7 +332,7 @@ git commit -m "refactor: align navigation with content structure"
 - [工程化技能](工程化技能.md)
 ```
 
-- [ ] **Step 2: 修复第一部分的教程链接**
+- [x] **Step 2: 修复第一部分的教程链接**
 
 把仓库绝对双链改为：
 
@@ -340,7 +340,7 @@ git commit -m "refactor: align navigation with content structure"
 [Markdown 语法详细教程](Markdown语法详细教程.md)
 ```
 
-- [ ] **Step 3: 对齐第二部分总览**
+- [x] **Step 3: 对齐第二部分总览**
 
 将 roadmap 和下一步替换为：
 
@@ -355,7 +355,7 @@ git commit -m "refactor: align navigation with content structure"
 进入[底层原理](底层原理.md)。
 ```
 
-- [ ] **Step 4: 对齐第三部分总览**
+- [x] **Step 4: 对齐第三部分总览**
 
 将标题、资源地图和下一步替换为：
 
@@ -377,7 +377,7 @@ git commit -m "refactor: align navigation with content structure"
 下一步可从[魔法](魔法.md)开始。
 ```
 
-- [ ] **Step 5: 对齐首页第三张卡片名称**
+- [x] **Step 5: 对齐首页第三张卡片名称**
 
 在 `docs/index.md` 中只将第三张卡片的：
 
@@ -391,7 +391,7 @@ git commit -m "refactor: align navigation with content structure"
 <strong>链接合集</strong>
 ```
 
-- [ ] **Step 6: 修复资源页中缺失左方括号的外链**
+- [x] **Step 6: 修复资源页中缺失左方括号的外链**
 
 将资源页中的链接统一为以下有效 Markdown：
 
@@ -403,7 +403,7 @@ git commit -m "refactor: align navigation with content structure"
 [前端基础教程 - 搞七捻三 - LINUX DO](https://linux.do/t/topic/489164/13)
 ```
 
-- [ ] **Step 7: 把会触发缺失资源警告的演示图片改为代码示例**
+- [x] **Step 7: 把会触发缺失资源警告的演示图片改为代码示例**
 
 在 `Markdown语法详细教程.md` 的实验报告模板中，将活动图片链接：
 
@@ -417,19 +417,19 @@ git commit -m "refactor: align navigation with content structure"
 `![实验结果](assets/result.png)`
 ```
 
-- [ ] **Step 8: 运行结构测试**
+- [x] **Step 8: 运行结构测试**
 
 Run: `.venv\Scripts\python.exe tests\verify_content_structure.py`
 
 Expected: 输出 `Content structure verification passed: navigation, titles, and links.`。
 
-- [ ] **Step 9: 运行严格构建**
+- [x] **Step 9: 运行严格构建**
 
 Run: `.venv\Scripts\python.exe -m mkdocs build --clean --strict`
 
 Expected: exit code 0，且无 WARNING。
 
-- [ ] **Step 10: 提交总览与链接修复**
+- [x] **Step 10: 提交总览与链接修复**
 
 ```powershell
 git add -- docs tests/verify_content_structure.py
@@ -448,7 +448,7 @@ git commit -m "fix: repair guide navigation links"
 - Consumes: Task 1 已经写入的新导航断言，以及 Tasks 2–3 的新导航和页面 URL。
 - Produces: 覆盖新内容结构、Mermaid、暗色、平板和手机行为的最终验收证据。
 
-- [ ] **Step 1: 运行浏览器测试验证新结构与布局**
+- [x] **Step 1: 运行浏览器测试验证新结构与布局**
 
 Run:
 
@@ -460,7 +460,7 @@ python C:\Users\zj\.codex\skills\webapp-testing\scripts\with_server.py `
 
 Expected: 输出 `Site verification passed: desktop, dark mode, tablet, and mobile.`，控制台错误列表为空。
 
-- [ ] **Step 2: 执行全部最终验证**
+- [x] **Step 2: 执行全部最终验证**
 
 Run: `.venv\Scripts\python.exe tests\verify_content_structure.py`
 
@@ -474,11 +474,11 @@ Run: `git diff --check`
 
 Expected: 无空白错误。
 
-- [ ] **Step 3: 更新任务记录**
+- [x] **Step 3: 更新任务记录**
 
 在 `task_plan.md` 增加 2026-10-01 小节，记录：新导航完成、页面标题规范化、链接修复、严格构建通过、桌面/平板/手机测试通过。
 
-- [ ] **Step 4: 提交最终验收更新**
+- [x] **Step 4: 提交最终验收更新**
 
 ```powershell
 git add -- tests/verify_site.py task_plan.md
