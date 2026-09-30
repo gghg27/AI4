@@ -43,10 +43,26 @@ def verify_desktop(browser) -> None:
     ).is_visible()
     assert primary_sidebar.get_by_role("link", name="关于", exact=True).is_visible()
 
+    primary_box = primary_sidebar.bounding_box()
+    content_box = page.locator(".md-content").bounding_box()
+    secondary_box = page.locator(".md-sidebar--secondary").bounding_box()
+    assert primary_box is not None
+    assert content_box is not None
+    assert secondary_box is not None
+    assert primary_box["x"] < content_box["x"] < secondary_box["x"]
+    assert content_box["width"] >= 640
+
     assert page.locator(".route-card").count() == 3
     assert page.locator(".route-grid").evaluate(
         "el => getComputedStyle(el).gridTemplateColumns.split(' ').length"
     ) == 3
+    route_card = page.locator(".route-card").first
+    assert route_card.evaluate(
+        """el => (
+            parseFloat(getComputedStyle(el).minHeight) /
+            parseFloat(getComputedStyle(document.documentElement).fontSize)
+        )"""
+    ) <= 9.5
     assert page.locator(".md-header").evaluate(
         "el => getComputedStyle(el).backgroundColor"
     ) == "rgb(228, 242, 255)"

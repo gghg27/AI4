@@ -105,7 +105,7 @@ git commit -m "refactor: move guide navigation to sidebar"
 - Consumes: Task 1 生成的 `.md-sidebar--primary` 左栏和 Material 原生 `.md-sidebar--secondary` 文章目录。
 - Produces: 桌面端从左到右排列的主导航、正文、文章目录，以及视觉重量更轻的首页入口卡片。
 
-- [ ] **Step 1: 写入失败的桌面几何和首页卡片断言**
+- [x] **Step 1: 写入失败的桌面几何和首页卡片断言**
 
 在 `verify_desktop` 中取得元素边界并加入：
 
@@ -125,13 +125,13 @@ git commit -m "refactor: move guide navigation to sidebar"
 
 将旧的页头背景色断言保留，用于证明现有配色未改变。
 
-- [ ] **Step 2: 运行验证并确认几何或卡片高度断言失败**
+- [x] **Step 2: 运行验证并确认几何或卡片高度断言失败**
 
 Run: `.venv\Scripts\python tests\verify_site.py`
 
 Expected: FAIL because the current `.md-grid`/`.md-content__inner` sizing and `.route-card` minimum height do not meet the new layout contract.
 
-- [ ] **Step 3: 在现有 CSS 变量基础上实现三栏尺寸**
+- [x] **Step 3: 在现有 CSS 变量基础上实现三栏尺寸**
 
 在 `extra.css` 中调整现有规则，不复制主题完整样式：
 
@@ -183,7 +183,7 @@ Expected: FAIL because the current `.md-grid`/`.md-content__inner` sizing and `.
 
 保持顶栏现有颜色，只压缩工具栏的视觉高度和阴影；不要创建第二层导航。
 
-- [ ] **Step 4: 降低首页卡片视觉重量**
+- [x] **Step 4: 降低首页卡片视觉重量**
 
 修改现有 `.route-card` 和 hover 规则：
 
@@ -202,11 +202,11 @@ Expected: FAIL because the current `.md-grid`/`.md-content__inner` sizing and `.
 
 在 `prefers-reduced-motion` 规则下继续禁用该位移过渡。
 
-- [ ] **Step 5: 为暗色模式补齐侧栏文字与边界颜色**
+- [x] **Step 5: 为暗色模式补齐侧栏文字与边界颜色**
 
 在现有 slate 主题块中让侧栏标题、链接和滚动条使用 `--guide-ink`、`--guide-muted`、`--guide-border`，不得引入新的紫色或灰黑配色体系。
 
-- [ ] **Step 6: 运行严格构建和桌面验证**
+- [x] **Step 6: 运行严格构建和桌面验证**
 
 Run: `.venv\Scripts\python -m mkdocs build --strict`
 
@@ -216,7 +216,7 @@ Run: `.venv\Scripts\python tests\verify_site.py`
 
 Expected: 桌面首页、暗色模式、文章页 Mermaid 验证均 PASS，控制台错误列表为空。
 
-- [ ] **Step 7: 提交桌面布局**
+- [x] **Step 7: 提交桌面布局**
 
 ```powershell
 git add -- docs/assets/stylesheets/extra.css tests/verify_site.py

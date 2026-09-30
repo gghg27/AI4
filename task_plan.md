@@ -29,6 +29,8 @@
 - `developers.openai.com/codex/skills` 直连返回 403：以公开搜索结果和本机系统 Skill 说明交叉核验，并明确证据边界。
 - OpenAI Skills 列表脚本访问 GitHub API 返回 403：改为读取公开 GitHub 目录页。
 - 本机 `npm` 启动脚本缺失：改用 npm 公共注册表 API 核验 `@openai/codex` 包。
+- 布局测试最初用文本定位章节标题时同时命中折叠标签和导航标题：改为只定位可见的 `label.md-nav__link`。
+- 卡片高度测试最初假设根字号为 16px，但 Material 桌面端实际为 20px：改为按 `rem` 比例验证，避免依赖视口字号实现细节。
 
 ## 2026-09-25 重构记录
 
