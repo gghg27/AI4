@@ -6,28 +6,48 @@ from mkdocs.config import load_config
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
-EXPECTED_NAV_PATHS = [
-    "index.md",
-    "introduction.md",
-    "01-computer/index.md",
-    "01-computer/计算机基础扫盲.md",
-    "01-computer/电子笔记.md",
-    "01-computer/与ai交互的文档格式.md",
-    "01-computer/Markdown语法详细教程.md",
-    "01-computer/科学上网.md",
-    "01-computer/cs自学指南.md",
-    "01-computer/技术论坛与电子书资源.md",
-    "01-computer/工程化技能.md",
-    "02-ai-and-agents/index.md",
-    "02-ai-and-agents/底层原理.md",
-    "02-ai-and-agents/应用层.md",
-    "03-resources/index.md",
-    "03-resources/魔法.md",
-    "03-resources/学习资源类.md",
-    "03-resources/大模型agent.md",
-    "03-resources/软件开发.md",
-    "03-resources/算法训练.md",
-    "about.md",
+EXPECTED_NAV = [
+    {"首页": "index.md"},
+    {"引言": "introduction.md"},
+    {
+        "学习地图": [
+            {
+                "第一部分：计算机第一课": [
+                    {"总览": "01-computer/index.md"},
+                    {"计算机基础扫盲": "01-computer/计算机基础扫盲.md"},
+                    {"电子笔记": "01-computer/电子笔记.md"},
+                    {
+                        "与 AI 交互的文档格式": [
+                            {"总览": "01-computer/与ai交互的文档格式.md"},
+                            {"Markdown 语法详细教程": "01-computer/Markdown语法详细教程.md"},
+                        ]
+                    },
+                    {"科学上网": "01-computer/科学上网.md"},
+                    {"CS 自学指南": "01-computer/cs自学指南.md"},
+                    {"技术论坛与电子书资源": "01-computer/技术论坛与电子书资源.md"},
+                    {"工程化技能": "01-computer/工程化技能.md"},
+                ]
+            },
+            {
+                "第二部分：大模型与 Agent": [
+                    {"总览": "02-ai-and-agents/index.md"},
+                    {"底层原理": "02-ai-and-agents/底层原理.md"},
+                    {"应用层": "02-ai-and-agents/应用层.md"},
+                ]
+            },
+            {
+                "第三部分：链接合集": [
+                    {"总览": "03-resources/index.md"},
+                    {"魔法": "03-resources/魔法.md"},
+                    {"学习资源类": "03-resources/学习资源类.md"},
+                    {"大模型与 Agent": "03-resources/大模型agent.md"},
+                    {"软件开发": "03-resources/软件开发.md"},
+                    {"算法训练": "03-resources/算法训练.md"},
+                ]
+            },
+        ]
+    },
+    {"关于": "about.md"},
 ]
 
 EXPECTED_TITLES = {
@@ -64,23 +84,23 @@ STALE_REFERENCES = {
 }
 
 
-def flatten_nav(items: list[object]) -> list[str]:
+def nav_paths(items: list[dict[str, object]]) -> list[str]:
     paths: list[str] = []
     for item in items:
-        if isinstance(item, str):
-            paths.append(item)
-        elif isinstance(item, dict):
-            for value in item.values():
-                if isinstance(value, str):
-                    paths.append(value)
-                else:
-                    paths.extend(flatten_nav(value))
+        for value in item.values():
+            if isinstance(value, str):
+                paths.append(value)
+            else:
+                paths.extend(nav_paths(value))
     return paths
 
 
 config = load_config(config_file=str(ROOT / "mkdocs.yml"))
-actual_nav_paths = flatten_nav(config["nav"])
-assert actual_nav_paths == EXPECTED_NAV_PATHS, actual_nav_paths
+assert config["nav"] == EXPECTED_NAV, config["nav"]
+expected_nav_paths = nav_paths(EXPECTED_NAV)
+assert len(expected_nav_paths) == 21
+for relative_path in expected_nav_paths:
+    assert (DOCS / relative_path).is_file(), relative_path
 
 for relative_path, title in EXPECTED_TITLES.items():
     text = (DOCS / relative_path).read_text(encoding="utf-8")
