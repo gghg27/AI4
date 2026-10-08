@@ -1,4 +1,5 @@
 from pathlib import Path
+from urllib.parse import unquote
 
 from playwright.sync_api import sync_playwright
 
@@ -17,6 +18,10 @@ def assert_no_horizontal_overflow(page, viewport_width: int) -> None:
 def verify_desktop(browser) -> None:
     errors: list[str] = []
     page = browser.new_page(viewport={"width": 1440, "height": 900})
+    page.route(
+        "https://giscus.app/client.js",
+        lambda route: route.fulfill(status=200, content_type="text/javascript", body=""),
+    )
     page.emulate_media(color_scheme="light")
     page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
     page.on("pageerror", lambda error: errors.append(f"PAGEERROR: {error}"))
@@ -31,7 +36,6 @@ def verify_desktop(browser) -> None:
     primary_sidebar = page.locator(".md-sidebar--primary")
     assert primary_sidebar.is_visible()
     assert primary_sidebar.get_by_role("link", name="首页", exact=True).is_visible()
-    assert primary_sidebar.get_by_role("link", name="引言", exact=True).is_visible()
     assert primary_sidebar.locator(
         "label.md-nav__link", has_text="第一部分：计算机第一课"
     ).is_visible()
@@ -44,7 +48,6 @@ def verify_desktop(browser) -> None:
     assert primary_sidebar.get_by_text("计算机基础扫盲", exact=True).is_visible()
     assert primary_sidebar.get_by_text("底层原理", exact=True).is_visible()
     assert primary_sidebar.get_by_text("魔法", exact=True).is_visible()
-    assert primary_sidebar.get_by_role("link", name="关于", exact=True).is_visible()
 
     primary_box = primary_sidebar.bounding_box()
     content_box = page.locator(".md-content").bounding_box()
@@ -91,6 +94,12 @@ def verify_desktop(browser) -> None:
         wait_until="domcontentloaded",
     )
     assert page.locator("h1").first.inner_text().startswith("底层原理")
+    skill_link = page.get_by_role("link", name="从 0 搭建 Skill")
+    assert skill_link.is_visible()
+    skill_link.click()
+    page.wait_for_function("decodeURI(location.pathname).endsWith('/从0搭建skill/')")
+    assert unquote(page.url).endswith("/从0搭建skill/")
+    page.locator(".md-content").get_by_text("Skill 是一个给 Agent 使用的").wait_for()
 
     page.goto(
         f"{BASE_URL}01-computer/Markdown语法详细教程/",
@@ -124,7 +133,7 @@ def verify_mobile(browser) -> None:
 
     page.locator('label[for="__drawer"].md-header__button').click()
     assert page.locator("#__drawer").is_checked()
-    assert page.get_by_role("link", name="引言").first.is_visible()
+    assert page.locator(".md-sidebar--primary .md-logo").is_visible()
     page.locator('label[for="__drawer"].md-overlay').click()
     assert not page.locator("#__drawer").is_checked()
     page.wait_for_function(

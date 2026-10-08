@@ -8,7 +8,6 @@ DOCS = ROOT / "docs"
 
 EXPECTED_NAV = [
     {"首页": "index.md"},
-    {"引言": "introduction.md"},
     {
         "学习地图": [
             {
@@ -47,7 +46,6 @@ EXPECTED_NAV = [
             },
         ]
     },
-    {"关于": "about.md"},
 ]
 
 EXPECTED_TITLES = {
@@ -98,7 +96,7 @@ def nav_paths(items: list[dict[str, object]]) -> list[str]:
 config = load_config(config_file=str(ROOT / "mkdocs.yml"))
 assert config["nav"] == EXPECTED_NAV, config["nav"]
 expected_nav_paths = nav_paths(EXPECTED_NAV)
-assert len(expected_nav_paths) == 21
+assert len(expected_nav_paths) == 19
 for relative_path in expected_nav_paths:
     assert (DOCS / relative_path).is_file(), relative_path
 

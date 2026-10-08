@@ -1,6 +1,10 @@
 # Markdown 语法详细教程
 
+<div class="section-intro" markdown="1">
+
 > 适合零基础学习，也适合作为日常写笔记、写 README、写博客、写实验报告、写项目文档的速查手册。
+
+</div>
 
 ---
 

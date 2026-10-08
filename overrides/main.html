@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {{ super() }}
+  {% set comments = config.extra.comments %}
+  {% if page and comments.repo and comments.repo_id and comments.category_id %}
+    <section class="guide-comments" aria-labelledby="guide-comments-title">
+      <h2 id="guide-comments-title">评论</h2>
+      <div
+        class="guide-comments__thread"
+        data-repo="{{ comments.repo }}"
+        data-repo-id="{{ comments.repo_id }}"
+        data-category="{{ comments.category }}"
+        data-category-id="{{ comments.category_id }}"
+      ></div>
+    </section>
+  {% endif %}
+{% endblock %}

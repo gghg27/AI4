@@ -16,6 +16,16 @@
   --guide-radius: 8px;
 }
 
+.guide-comments {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--guide-border);
+}
+
+.guide-comments h2 {
+  margin-top: 0.5rem;
+}
+
 :root > * {
   --md-primary-fg-color: var(--guide-navy);
   --md-primary-fg-color--light: var(--guide-navy-soft);
@@ -134,6 +144,47 @@ body {
 
 .md-typeset h1 {
   margin-bottom: 0.8rem;
+}
+
+/* Give the section introduction its own readable, prominent surface. */
+.md-typeset .section-intro {
+  margin: 1.2rem 0 1.8rem;
+  padding: clamp(0.9rem, 3vw, 1.4rem);
+  background: var(--guide-pale);
+  border: 1px solid var(--guide-border);
+  border-left: 5px solid var(--guide-blue);
+  border-radius: var(--guide-radius);
+}
+
+.md-typeset .section-intro > blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--guide-ink);
+  line-height: 1.9;
+}
+
+.md-typeset .section-intro > blockquote > p:first-child {
+  margin-top: 0;
+}
+
+.md-typeset .section-intro > blockquote > p:last-child {
+  margin-bottom: 0;
+}
+
+.md-typeset .section-intro strong {
+  display: block;
+  margin-top: 0.8rem;
+  color: var(--guide-navy-soft);
+  font-size: 1.05em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .section-intro {
+  border-left-color: #69b7ff;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .section-intro strong {
+  color: #8bc5ff;
 }
 
 .md-typeset h2 {
