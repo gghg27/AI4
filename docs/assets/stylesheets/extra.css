@@ -492,6 +492,12 @@ body {
   }
 }
 
+@media screen and (max-width: 76.234375rem) {
+  .md-content__inner {
+    margin-inline: 0.8rem;
+  }
+}
+
 @media screen and (max-width: 60rem) {
   .md-sidebar--primary {
     width: 12.1rem;
@@ -513,7 +519,6 @@ body {
 
   .md-content__inner {
     max-width: none;
-    margin-inline: auto;
   }
 
   .route-card {

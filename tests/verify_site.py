@@ -15,6 +15,13 @@ def assert_no_horizontal_overflow(page, viewport_width: int) -> None:
     assert metrics["scrollWidth"] <= max(metrics["clientWidth"], viewport_width), metrics
 
 
+def assert_content_gutters(page, viewport_width: int) -> None:
+    box = page.locator(".md-content__inner").bounding_box()
+    assert box is not None
+    assert box["x"] >= 12, box
+    assert box["x"] + box["width"] <= viewport_width - 12, box
+
+
 def verify_desktop(browser) -> None:
     errors: list[str] = []
     page = browser.new_page(viewport={"width": 1440, "height": 900})
@@ -149,6 +156,22 @@ def verify_mobile(browser) -> None:
     page.close()
 
 
+def verify_narrow_content(browser) -> None:
+    for width in (320, 390, 430):
+        page = browser.new_page(viewport={"width": width, "height": 844})
+        page.route(
+            "https://giscus.app/client.js",
+            lambda route: route.fulfill(
+                status=200, content_type="text/javascript", body=""
+            ),
+        )
+        for path in ("", "01-computer/Markdown语法详细教程/"):
+            page.goto(f"{BASE_URL}{path}", wait_until="domcontentloaded")
+            assert_content_gutters(page, width)
+            assert_no_horizontal_overflow(page, width)
+        page.close()
+
+
 def verify_tablet(browser) -> None:
     page = browser.new_page(viewport={"width": 1024, "height": 900})
     page.emulate_media(color_scheme="light")
@@ -169,6 +192,7 @@ with sync_playwright() as playwright:
     verify_desktop(chromium)
     verify_tablet(chromium)
     verify_mobile(chromium)
+    verify_narrow_content(chromium)
     chromium.close()
 
 print("Site verification passed: desktop, dark mode, tablet, and mobile.")
