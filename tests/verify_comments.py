@@ -5,6 +5,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
+from urllib.parse import urlsplit
 
 from playwright.sync_api import sync_playwright
 
@@ -70,12 +71,18 @@ with tempfile.TemporaryDirectory() as tmp:
             comments = page.locator(".guide-comments__thread script")
             comments.wait_for(state="attached")
             assert comments.get_attribute("data-theme") == "light"
+            assert comments.get_attribute("data-mapping") == "pathname"
+            assert comments.get_attribute("data-strict") == "1"
+            home_path = urlsplit(page.url).path
             page.locator('label[title="切换到深色模式"]').click(force=True)
             page.get_by_role("link", name="计算机基础扫盲").first.click()
             page.wait_for_url("**/01-computer/*/")
             comments = page.locator(".guide-comments__thread script")
             comments.wait_for(state="attached")
             assert comments.get_attribute("data-theme") == "dark"
+            assert comments.get_attribute("data-mapping") == "pathname"
+            assert comments.get_attribute("data-strict") == "1"
+            assert urlsplit(page.url).path != home_path
             browser.close()
     finally:
         server.shutdown()

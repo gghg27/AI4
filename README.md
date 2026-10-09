@@ -26,6 +26,16 @@ python -m venv .venv
 
 仓库已包含 `.github/workflows/deploy.yml`。推送到 `main` 或 `master` 后，在 GitHub 仓库的 **Settings → Pages → Build and deployment** 中把 Source 设为 **GitHub Actions**。工作流会构建并发布站点。
 
+以后修改 `docs/` 中的网站内容，先提交，再推送到远端 `main`：
+
+```powershell
+git add docs
+git commit -m "docs: update content"
+git push origin HEAD:main
+```
+
+当前本地分支名为 `codex/mkdocs-site`，所以推送时使用 `HEAD:main`。GitHub Actions 会在推送后自动重新部署。若同时修改了 `mkdocs.yml`、`README.md` 或站点工作流，请用 `git add` 明确加入这些文件；不要直接运行 `git add .`，以免把未发布的笔记和草稿提交到网站仓库。
+
 ## 启用全站评论
 
 每个内容页都有独立的 Giscus 评论区，统一使用 [gghg27/ai_discuss](https://github.com/gghg27/ai_discuss) 的 `General` Discussions 分类存放评论。评论公开可读，发表和回复需要登录 GitHub。评论仓库已启用 Discussions 并安装 Giscus App，仓库和分类 ID 已写入 `mkdocs.yml`，网站部署时无需额外配置。
