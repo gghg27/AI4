@@ -11,6 +11,7 @@
 
 
 ## SKILL
+skill介绍：[从 0 搭建 Skill](../从0搭建skill.md)
 查找下载skill：[vercel — Agent skills](https://www.skills.sh/vercel)
 
 
