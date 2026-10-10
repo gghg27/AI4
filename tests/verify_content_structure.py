@@ -22,6 +22,7 @@ EXPECTED_NAV = [
                         ]
                     },
                     {"科学上网": "01-computer/科学上网.md"},
+                    {"信息搜集": "01-computer/信息搜集.md"},
                     {"CS 自学指南": "01-computer/cs自学指南.md"},
                     {"技术论坛与电子书资源": "01-computer/技术论坛与电子书资源.md"},
                     {"工程化技能": "01-computer/工程化技能.md"},
@@ -40,7 +41,12 @@ EXPECTED_NAV = [
                     {"魔法": "03-resources/魔法.md"},
                     {"学习资源类": "03-resources/学习资源类.md"},
                     {"大模型与 Agent": "03-resources/大模型agent.md"},
-                    {"软件开发": "03-resources/软件开发.md"},
+                    {
+                        "软件开发": [
+                            {"总览": "03-resources/软件开发.md"},
+                            {"JavaScript 与 Node.js": "03-resources/Javascript.md"},
+                        ]
+                    },
                     {"算法训练": "03-resources/算法训练.md"},
                 ]
             },
@@ -53,6 +59,7 @@ EXPECTED_TITLES = {
     "01-computer/电子笔记.md": "电子笔记",
     "01-computer/与ai交互的文档格式.md": "与 AI 交互的文档格式",
     "01-computer/科学上网.md": "科学上网",
+    "01-computer/信息搜集.md": "信息搜集",
     "01-computer/cs自学指南.md": "CS 自学指南",
     "01-computer/技术论坛与电子书资源.md": "技术论坛与电子书资源",
     "01-computer/工程化技能.md": "工程化技能",
@@ -62,6 +69,7 @@ EXPECTED_TITLES = {
     "03-resources/学习资源类.md": "学习资源类",
     "03-resources/大模型agent.md": "大模型与 Agent",
     "03-resources/软件开发.md": "软件开发",
+    "03-resources/Javascript.md": "node.js",
     "03-resources/算法训练.md": "算法训练",
 }
 
@@ -96,7 +104,7 @@ def nav_paths(items: list[dict[str, object]]) -> list[str]:
 config = load_config(config_file=str(ROOT / "mkdocs.yml"))
 assert config["nav"] == EXPECTED_NAV, config["nav"]
 expected_nav_paths = nav_paths(EXPECTED_NAV)
-assert len(expected_nav_paths) == 19
+assert len(expected_nav_paths) == 21
 for relative_path in expected_nav_paths:
     assert (DOCS / relative_path).is_file(), relative_path
 

@@ -51,6 +51,7 @@ nav:
               - 总览: 01-computer/与ai交互的文档格式.md
               - Markdown 语法详细教程: 01-computer/Markdown语法详细教程.md
           - 科学上网: 01-computer/科学上网.md
+          - 信息搜集: 01-computer/信息搜集.md
           - CS 自学指南: 01-computer/cs自学指南.md
           - 技术论坛与电子书资源: 01-computer/技术论坛与电子书资源.md
           - 工程化技能: 01-computer/工程化技能.md
@@ -63,7 +64,9 @@ nav:
           - 魔法: 03-resources/魔法.md
           - 学习资源类: 03-resources/学习资源类.md
           - 大模型与 Agent: 03-resources/大模型agent.md
-          - 软件开发: 03-resources/软件开发.md
+          - 软件开发:
+              - 总览: 03-resources/软件开发.md
+              - JavaScript 与 Node.js: 03-resources/Javascript.md
           - 算法训练: 03-resources/算法训练.md
 
 plugins:
